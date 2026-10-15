@@ -22,10 +22,22 @@ public class CharacterController {
         return "characters/list";
     }
 
-    @GetMapping("/{id}")
-    public String detail(@PathVariable Long id, Model model) {
-        model.addAttribute("character", service.findById(id));
-        return "characters/detail";
+    @GetMapping("/delete/{id}")
+    public String deleteCharacter(@PathVariable Long id) {
+        service.borrarPersonaje(id);
+        return "redirect:/episodes";
+    }
+
+    @GetMapping("/create")
+    public String createCharacter() {
+        service.crearPersonajeYLocalizacionHardCoded();
+        return "redirect:/characters";
+    }
+
+    @GetMapping("/summary")
+    public String summary(Model model) {
+        model.addAttribute("resumen", service.getPersonajesConUbicacionYTotalEpisodios());
+        return "characters/summary";
     }
 }
 

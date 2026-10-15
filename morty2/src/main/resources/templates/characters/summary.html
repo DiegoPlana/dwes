@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumen de Personajes</title>
+</head>
+<body>
+<h1>Resumen de Personajes, Ubicación y N° de Episodios</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Personaje</th>
+        <th>Ubicación</th>
+        <th>Total Episodios</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="fila : ${resumen}">
+        <td th:text="${fila[0]}">Nombre Personaje</td>
+        <td th:text="${fila[1]}">Nombre Ubicación</td>
+        <td th:text="${fila[2]}">Cantidad Episodios</td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/characters}">Volver al listado</a>
+</body>
+</html>

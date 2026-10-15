@@ -14,12 +14,44 @@ public class CharacterService {
     }
 
     public List<Character> findAll() {
-        return repository.findAll();
-    }
+        return repository.findPersonajesMasAltosQue(1.70);    }
+
 
     public Character findById(Long id) {
         return repository.findById(id).orElse(null);
     }
+
+    public void borrarPersonaje(Long id) {
+        repository.deleteById(id);
+    }
+
+    // Autowired sirve para usar otro repositorio, en este caso location
+    @org.springframework.beans.factory.annotation.Autowired
+    private daw2.dwes.morty1.repository.LocationRepository locationRepository;
+
+    public void crearPersonajeYLocalizacionHardCoded() {
+
+        daw2.dwes.morty1.model.Location nuevaUbicacion = new daw2.dwes.morty1.model.Location();
+        nuevaUbicacion.setName("Planeta Tierra 2.0");
+        nuevaUbicacion.setDimension("Dimensión C-138");
+        locationRepository.save(nuevaUbicacion);
+
+
+        daw2.dwes.morty1.model.Character nuevoPersonaje = new daw2.dwes.morty1.model.Character();
+        nuevoPersonaje.setName("Morty Malvado Clon");
+        nuevoPersonaje.setStatus("Alive");
+        nuevoPersonaje.setSpecies("Human");
+
+        nuevoPersonaje.setLocation(nuevaUbicacion);
+
+        repository.save(nuevoPersonaje);
+    }
+
+    public List<Object[]> getPersonajesConUbicacionYTotalEpisodios() {
+        return repository.findPersonajesConUbicacionYTotalEpisodios();
+    }
+
+
 }
 
 

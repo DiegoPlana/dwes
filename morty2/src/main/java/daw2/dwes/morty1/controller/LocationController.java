@@ -1,5 +1,6 @@
 package daw2.dwes.morty1.controller;
 
+import daw2.dwes.morty1.model.Location;
 import daw2.dwes.morty1.service.LocationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,4 +28,7 @@ public class LocationController {
         model.addAttribute("location", service.findById(id));
         return "locations/detail";
     }
+
+
+
 }

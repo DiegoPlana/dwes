@@ -27,4 +27,16 @@ public class EpisodeController {
         model.addAttribute("episode", service.findById(id));
         return "episodes/detail";
     }
+
+    @GetMapping("/create")
+    public String createEpisode() {
+        service.crearEpisodioHardCoded();
+        return "redirect:/episodes";
+    }
+
+    @GetMapping("/total")
+    public String showTotalEpisodes(Model model) {
+        model.addAttribute("total", service.getTotalEpisodios());
+        return "episodes/total";
+    }
 }
