@@ -8,11 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@ToString
 public class Hero {
     @Id
     @Column(name = "name", nullable = false)
@@ -25,5 +27,6 @@ public class Hero {
     private float experience;
 
     @OneToMany(mappedBy = "hero")
-    private List<Quest> quests;
+    @ToString.Exclude
+    private List<Quest> quests = new java.util.ArrayList<>();
 }
