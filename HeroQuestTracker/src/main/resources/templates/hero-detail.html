@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detalle del héroe | HeroQuestTracker</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<main>
+    <h1 th:text="${hero.name}">Nombre del héroe</h1>
+    <dl>
+        <dt>Clase</dt><dd th:text="${hero.heroClass}">Clase</dd>
+        <dt>Nivel</dt><dd th:text="${hero.nivel}">1</dd>
+        <dt>Experiencia</dt><dd th:text="${#numbers.formatDecimal(hero.experience, 1, 1)}">0.0</dd>
+    </dl>
+    <h2>Misiones asignadas</h2>
+    <table>
+        <thead><tr><th>Misión</th><th>Experiencia</th><th>Estado</th></tr></thead>
+        <tbody>
+        <tr th:each="quest : ${quests}">
+            <td th:text="${quest.title}">Título</td>
+            <td th:text="${#numbers.formatDecimal(quest.experience, 1, 1)}">0.0</td>
+            <td th:text="${quest.solved} ? 'Resuelta' : 'Pendiente'">Pendiente</td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(quests)}"><td colspan="3">Este héroe todavía no tiene misiones.</td></tr>
+        </tbody>
+    </table>
+    <p><a th:href="@{/heroes}">Volver a héroes</a> | <a th:href="@{/quests}">Ver todas las misiones</a></p>
+</main>
+</body>
+</html>

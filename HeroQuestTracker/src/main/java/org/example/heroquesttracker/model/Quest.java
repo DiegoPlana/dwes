@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@ToString
 public class Quest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,12 +17,13 @@ public class Quest {
     @Column(name = "title",  nullable = false)
     private String title;
     @Column(name = "solved",  nullable = false)
-    private Boolean Solved;
+    private Boolean solved;
     @Column(name = "xp",   nullable = false)
-    private float Experience;
+    private float experience;
 
     @ManyToOne
     @JoinColumn(name = "name")
+    @ToString.Exclude
     private Hero hero;
 
 }

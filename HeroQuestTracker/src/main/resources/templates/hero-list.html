@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Héroes | HeroQuestTracker</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<main>
+    <h1>Héroes</h1>
+    <nav>
+        <a th:href="@{/heroes/initialize}">Inicializar héroes</a>
+        <a th:href="@{/quests}">Ver misiones</a>
+    </nav>
+    <table>
+        <thead><tr><th>Nombre</th><th>Clase</th><th>Nivel</th><th>Experiencia</th><th>Detalle</th></tr></thead>
+        <tbody>
+        <tr th:each="hero : ${heroes}">
+            <td th:text="${hero.name}">Aria</td>
+            <td th:text="${hero.heroClass}">Mage</td>
+            <td th:text="${hero.nivel}">1</td>
+            <td th:text="${#numbers.formatDecimal(hero.experience, 1, 1)}">0.0</td>
+            <td><a th:href="@{/heroes/{name}(name=${hero.name})}">Ver detalle</a></td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(heroes)}"><td colspan="5">Todavía no hay héroes.</td></tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

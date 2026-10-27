@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Misiones | HeroQuestTracker</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<main>
+    <h1>Misiones</h1>
+    <nav>
+        <a th:href="@{/quests/new}">Crear misión aleatoria</a>
+        <a th:href="@{/heroes}">Ver héroes</a>
+    </nav>
+    <table>
+        <thead><tr><th>Título</th><th>Héroe</th><th>Experiencia</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <tbody>
+        <tr th:each="quest : ${quests}">
+            <td th:text="${quest.title}">Título</td>
+            <td><a th:href="@{/heroes/{name}(name=${quest.hero.name})}" th:text="${quest.hero.name}">Héroe</a></td>
+            <td th:text="${#numbers.formatDecimal(quest.experience, 1, 1)}">0.0</td>
+            <td th:text="${quest.solved} ? 'Resuelta' : 'Pendiente'">Pendiente</td>
+            <td>
+                <a th:if="${!quest.solved}" th:href="@{/quests/solve/{id}(id=${quest.id})}">Completar</a>
+                <a th:href="@{/quests/fail/{id}(id=${quest.id})}">Fallar</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(quests)}"><td colspan="5">Todavía no hay misiones.</td></tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
